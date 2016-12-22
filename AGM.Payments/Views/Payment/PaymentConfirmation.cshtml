@@ -1,0 +1,41 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "Payment Confirmation";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/Forword.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            @{
+                string message = TempData["Message"] as string;
+            }
+            <div>
+                @if (!string.IsNullOrEmpty(message))
+                {
+                    <label>@message</label>
+                }
+            </div>
+        </div>
+        @if (Request.QueryString["ViewName"].ToString() == "Employee")
+        {
+            <div class="row">
+                @Html.ActionLink("Make Another Payment", "Index", "Employee")
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                @Html.ActionLink("Logout", "SignOut", "Home")
+            </div>
+        }
+    </div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+﻿@using AGM.Payments.Model
+@model EmployeeViewModel
+@{
+    ViewBag.Title = "Employee Configuration";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<div class="container">
+    <div class="row">        
+        <div class="row col-md-12">
+            @{
+                string message = TempData["Message"] as string;
+            }
+            @if (!string.IsNullOrEmpty(message))
+            {
+            <span id="message" class="alert-info">@message</span>
+            }
+        </div>
+        <div class="row">
+            <div class="col-md-5" id="Create">
+
+            </div>
+            <div class="col-md-7">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <strong>Employee List</strong>
+                    </div>
+                    <div class="form-group">
+                        <div class="table-responsive">
+                            <table class="table table-condensed table-striped table-hover table-bordered" id="employee" data-page-length='10'>
+                                <thead>
+                                    <tr>
+                                        <td>Properties</td>
+                                        <td>Name</td>
+                                        <td>Email</td>
+                                        <td>Password</td>
+                                        <td>Phone</td>
+                                        <td>Address</td>
+                                        <td>Action</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var emp in Model.Employees)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <ul>
+                                                    @foreach (var pro in emp.Properties)
+                                                    {
+                                                        <li class="control-label co-md-4">@pro.DisplayText</li>
+                                                    }
+                                                </ul>
+                                            </td>
+                                            <td>@emp.Name</td>
+                                            <td>@emp.Email</td>
+                                            <td>@emp.Password</td>
+                                            <td>@emp.Phone</td>
+                                            <td>@emp.Address</td>
+                                            <td>
+                                                <a href="#" onclick="Edit('@emp.EmployeeID')">Edit</a>
+                                                <a href="#" onclick="Delete('@emp.EmployeeID')">Delete</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<link href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+<script>
+    $("#message").delay(2000).fadeOut("slow");
+    $(document).ready(function () {
+        $("#employee").DataTable();
+        $.get("@Url.Action("CreateEmployee","Resman")" + '?employeeID=0', function (res) {
+            $("#Create").html(res);
+        });
+       
+    });
+    function Edit(employeeID) {
+        $("#EmployeeID").val = employeeID;
+        if (confirm("Are you sure you want Edit this record?")) {
+            $.get("@Url.Action("CreateEmployee", "Resman")" + "?employeeID=" + employeeID, function (res) {
+                $("#Create").html(res);
+                return false;
+            });
+        }
+    }
+    function Delete(employeeID) {
+        $("#EmployeeID").val = employeeID;
+        if (confirm("Are you sure you want Delete this record?")) {
+            $.get("@Url.Action("DeleteEmployee", "Resman")" + "?employeeID=" + employeeID, function (res) {
+                window.location.href = "@Url.Action("EmployeeConfiguration","Resman")";
+            });
+        }
+    }
+</script>

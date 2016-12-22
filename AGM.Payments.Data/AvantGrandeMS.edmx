@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AGM.Payments.Data.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AuthorizeAccounts">
+          <Key>
+            <PropertyRef Name="AuthAccountID" />
+          </Key>
+          <Property Name="AuthAccountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ApiID" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ApiKey" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="CreateOn" Type="datetime" />
+          <Property Name="CreateBy" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreateOn" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="250" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="100" />
+          <Property Name="TypeOfEmployee" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="EmployeePropertyPermission">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="PropertyID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="PropertyID" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="PropertyName" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="PaymentToProperty">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AuthAccountID" Type="int" Nullable="false" />
+          <Property Name="PropertyID" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <Association Name="FK_EmployeePropertyPermission_EmployeeID">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="EmployeePropertyPermission" Type="Self.EmployeePropertyPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="EmployeePropertyPermission">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentToProperty_AuthAccountID">
+          <End Role="AuthorizeAccounts" Type="Self.AuthorizeAccounts" Multiplicity="1" />
+          <End Role="PaymentToProperty" Type="Self.PaymentToProperty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AuthorizeAccounts">
+              <PropertyRef Name="AuthAccountID" />
+            </Principal>
+            <Dependent Role="PaymentToProperty">
+              <PropertyRef Name="AuthAccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AGMPaymentsDataStoreContainer">
+          <EntitySet Name="AuthorizeAccounts" EntityType="Self.AuthorizeAccounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeePropertyPermission" EntityType="Self.EmployeePropertyPermission" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentToProperty" EntityType="Self.PaymentToProperty" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_EmployeePropertyPermission_EmployeeID" Association="Self.FK_EmployeePropertyPermission_EmployeeID">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="EmployeePropertyPermission" EntitySet="EmployeePropertyPermission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentToProperty_AuthAccountID" Association="Self.FK_PaymentToProperty_AuthAccountID">
+            <End Role="AuthorizeAccounts" EntitySet="AuthorizeAccounts" />
+            <End Role="PaymentToProperty" EntitySet="PaymentToProperty" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AGM.Payments.Data" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="AvantGrandeMSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AuthorizeAccounts" EntityType="AGM.Payments.Data.AuthorizeAccount" />
+          <EntitySet Name="Employees" EntityType="AGM.Payments.Data.Employee" />
+          <EntitySet Name="EmployeePropertyPermissions" EntityType="AGM.Payments.Data.EmployeePropertyPermission" />
+          <EntitySet Name="PaymentToProperties" EntityType="AGM.Payments.Data.PaymentToProperty" />
+          <AssociationSet Name="FK_PaymentToProperty_AuthAccountID" Association="AGM.Payments.Data.FK_PaymentToProperty_AuthAccountID">
+            <End Role="AuthorizeAccount" EntitySet="AuthorizeAccounts" />
+            <End Role="PaymentToProperty" EntitySet="PaymentToProperties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmployeePropertyPermission_EmployeeID" Association="AGM.Payments.Data.FK_EmployeePropertyPermission_EmployeeID">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="EmployeePropertyPermission" EntitySet="EmployeePropertyPermissions" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AuthorizeAccount">
+          <Key>
+            <PropertyRef Name="AuthAccountID" />
+          </Key>
+          <Property Name="AuthAccountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ApiID" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ApiKey" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="CreateOn" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PaymentToProperties" Relationship="AGM.Payments.Data.FK_PaymentToProperty_AuthAccountID" FromRole="AuthorizeAccount" ToRole="PaymentToProperty" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreateOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EmployeePropertyPermissions" Relationship="AGM.Payments.Data.FK_EmployeePropertyPermission_EmployeeID" FromRole="Employee" ToRole="EmployeePropertyPermission" />
+          <Property Name="TypeOfEmployee" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="EmployeePropertyPermission">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+            <PropertyRef Name="PropertyID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="PropertyID" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PropertyName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="AGM.Payments.Data.FK_EmployeePropertyPermission_EmployeeID" FromRole="EmployeePropertyPermission" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="PaymentToProperty">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AuthAccountID" Type="Int32" Nullable="false" />
+          <Property Name="PropertyID" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AuthorizeAccount" Relationship="AGM.Payments.Data.FK_PaymentToProperty_AuthAccountID" FromRole="PaymentToProperty" ToRole="AuthorizeAccount" />
+        </EntityType>
+        <Association Name="FK_PaymentToProperty_AuthAccountID">
+          <End Type="AGM.Payments.Data.AuthorizeAccount" Role="AuthorizeAccount" Multiplicity="1" />
+          <End Type="AGM.Payments.Data.PaymentToProperty" Role="PaymentToProperty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AuthorizeAccount">
+              <PropertyRef Name="AuthAccountID" />
+            </Principal>
+            <Dependent Role="PaymentToProperty">
+              <PropertyRef Name="AuthAccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmployeePropertyPermission_EmployeeID">
+          <End Type="AGM.Payments.Data.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="AGM.Payments.Data.EmployeePropertyPermission" Role="EmployeePropertyPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="EmployeePropertyPermission">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AGMPaymentsDataStoreContainer" CdmEntityContainer="AvantGrandeMSEntities">
+          <EntitySetMapping Name="AuthorizeAccounts">
+            <EntityTypeMapping TypeName="AGM.Payments.Data.AuthorizeAccount">
+              <MappingFragment StoreEntitySet="AuthorizeAccounts">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="CreateOn" ColumnName="CreateOn" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ApiKey" ColumnName="ApiKey" />
+                <ScalarProperty Name="ApiID" ColumnName="ApiID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AuthAccountID" ColumnName="AuthAccountID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="AGM.Payments.Data.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="TypeOfEmployee" ColumnName="TypeOfEmployee" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreateOn" ColumnName="CreateOn" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeePropertyPermissions">
+            <EntityTypeMapping TypeName="AGM.Payments.Data.EmployeePropertyPermission">
+              <MappingFragment StoreEntitySet="EmployeePropertyPermission">
+                <ScalarProperty Name="PropertyName" ColumnName="PropertyName" />
+                <ScalarProperty Name="PropertyID" ColumnName="PropertyID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentToProperties">
+            <EntityTypeMapping TypeName="AGM.Payments.Data.PaymentToProperty">
+              <MappingFragment StoreEntitySet="PaymentToProperty">
+                <ScalarProperty Name="PropertyID" ColumnName="PropertyID" />
+                <ScalarProperty Name="AuthAccountID" ColumnName="AuthAccountID" />
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{91B1991B-5216-4AB1-8F18-BF72C69770B6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AGM.Payments.Business</RootNamespace>
+    <AssemblyName>AGM.Payments.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountHandler.cs" />
+    <Compile Include="AppSettingValues.cs" />
+    <Compile Include="AppStaticValues.cs" />
+    <Compile Include="AuthPayment.cs" />
+    <Compile Include="EmployeeHandler.cs" />
+    <Compile Include="HttpHandler.cs" />
+    <Compile Include="ProfileHandler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyHandler.cs" />
+    <Compile Include="ResidentHandler.cs" />
+    <Compile Include="ResmanHandler.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AGM.PaymentProcessor\AGM.PaymentProcessor.csproj">
+      <Project>{f0849332-7147-4017-ab17-3b8b2d30d847}</Project>
+      <Name>AGM.PaymentProcessor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AGM.Payments.Data\AGM.Payments.Data.csproj">
+      <Project>{092f68a3-2ab8-484d-8ac7-80cd1c7b902b}</Project>
+      <Name>AGM.Payments.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AGM.Payments.Model\AGM.Payments.Model.csproj">
+      <Project>{2c44625e-0ec2-4e59-8959-b4b00cdaea77}</Project>
+      <Name>AGM.Payments.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AGM.Payments.Utility\AGM.Payments.Utility.csproj">
+      <Project>{47f2cafb-e108-41e4-876e-d1a4e543fe99}</Project>
+      <Name>AGM.Payments.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

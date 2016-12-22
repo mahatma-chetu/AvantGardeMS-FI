@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "Property To Auth.Net account Mapping";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+@model AGM.Payments.Model.PaymentToPropertiesViewModel
+
+<div class="container">
+    <div class="row">
+        @{
+            string message = TempData["Message"] as string;
+        }
+        @if (!string.IsNullOrEmpty(message))
+            {
+        <span id="message" class="alert-info">@message</span>
+        }
+    </div>
+    <div class="row">
+        <div class="col-md-6" id="CreateEdit"></div>
+        <div class="col-md-6">
+            <div class="row"><h4>Payment to Property List</h4></div>
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-condensed table-striped table-hover table-bordered" id="employee" cellpadding="5" cellspacing="5">
+                        <thead>
+                            <tr>
+                                <td>Property Name</td>
+                                <td>Auth Account Name</td>
+                                <td>Action</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var payment in Model.PaymentsToProperties)
+                            {
+                                <tr>
+                                    <td>@payment.PropertyName</td>
+                                    <td>@payment.AuthAccountName</td>
+                                    <td>
+                                        <a href="#" onclick="Edit('@payment.PaymentID')">Edit</a>
+                                        <a href="#" onclick="Delete('@payment.PaymentID')">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<link href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+<script>
+
+    $(document).ready(function () {
+        $("#employee").DataTable();
+        $("#message").delay(5000).fadeOut("slow");
+        $.get("@Url.Action("CreateEditPayment", "Resman")" + '?paymentID=0', function (res) {
+            $("#CreateEdit").html(res);
+        });
+    });
+    function Edit(paymentID) {
+        $("#PaymentID").val = paymentID;
+        if (confirm("Are you sure you want Edit this record?")) {
+            $.get("@Url.Action("CreateEditPayment", "Resman")" + "?paymentID=" + paymentID, function (res) {
+                $("#CreateEdit").html(res);
+                return false;
+            });
+        }
+    }
+    function Delete(paymentID) {
+        $("#PaymentID").val = paymentID;
+        if (confirm("Are you sure you want Delete this record?")) {
+            $.get("@Url.Action("DeleteEmployee", "Resman")" + "?paymentID=" + employeeID, function (res) {
+                window.location.href = "@Url.Action("PropertyToPayment", "Resman")";
+            });
+        }
+    }
+</script>

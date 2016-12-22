@@ -1,0 +1,75 @@
+﻿@using AGM.Payments.Model
+@model PaymentToPropertiesViewModel
+@if (Model.AuthAccounts.Count > 0 && Model.Properties.Count > 0)
+{
+    using (Html.BeginForm("SavePayment", "Resman", FormMethod.Post, new { id = "frmPayment" }))
+    {
+        <div class="row">
+            <div class="form-horizontal">
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    @Html.HiddenFor(x => x.PaymentID)
+                    <label class="control-label col-md-4">Auth Accounts</label>
+                    <div class="col-md-8">
+                        @Html.DropDownListFor(x => x.AuthAccountID, new SelectList(Model.AuthAccounts, "Value", "DisplayText"), "Select Auth Account", new { id = "ddlAuth", @class = "form-control" })
+                        @Html.HiddenFor(x => x.AuthAccountID)
+                        @Html.ValidationMessageFor(x => x.AuthAccountID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4">Properties</label>
+                    <div class="col-md-8">
+                        @Html.DropDownListFor(x => x.PropertyID, new SelectList(Model.Properties, "Value", "DisplayText"), "Select Property", new { id = "ddlProperty", @class = "form-control" })
+                        @Html.HiddenFor(x => x.PropertyID)
+                        @Html.ValidationMessageFor(x => x.PropertyID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-4"></label>
+                    <div class="col-md-8">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                        <input type="reset" value="Cancel" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+}
+else
+{
+    <div class="row">There are no Authorize.net account left to map with Property</div>
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    $(document).ready(function () {
+        debugger;
+        var paymentID = $("#PaymentID").val();
+        if (paymentID != 0) {
+            $("#PaymentID").val(paymentID);
+            var auth = $("#AuthAccountID").val();
+            $("#ddlAuth").val(auth);
+            $("#AuthAccountID").val(auth);
+
+        }
+        var propertyID = $("#PropertyID").val();
+        if (propertyID.trim().length > 0) {
+            $("#ddlProperty").val(propertyID);
+            $("#PropertyID").val(propertyID);
+        }
+    });
+    $("#ddlAuth").change(function () {
+        var auth = $("#ddlAuth").val();
+        if (auth.trim().length > 0) {
+            $("#AuthAccountID").val(auth);
+        }
+    });
+    $("#ddlProperty").change(function () {
+        var auth = $("#ddlProperty").val();
+        if (auth.trim().length > 0) {
+            $("#PropertyID").val(auth);
+        }
+    });
+</script>

@@ -1,0 +1,47 @@
+﻿@model AGM.Payments.Model.ResmanSession
+<h2>Accounts</h2>
+<div>
+    <table class="table-bordered table-responsive">
+        <thead class="panel-heading">
+            <tr>
+                <td>BillingAccountID</td>
+                <td>Balance</td>
+                <td>Building</td>
+                <td>City</td>
+                <td>Email</td>
+                <td>FirstName</td>
+                <td>LastName</td>
+                <td>LeaseEndDate</td>
+                <td>LeaseStartDate</td>
+                <td>MoveInDate</td>
+                <td>PersonID</td>
+                <td>PropertyID</td>
+                <td>Status</td>
+                <td>State</td>
+                <td>StreetAddress</td>
+                <td>Unit</td>
+            </tr>
+        </thead>
+        @foreach (var item in Model.Accounts)
+        {
+            <tr>
+                <td>@item.BillingAccountID</td>
+                <td>@item.Balance</td>
+                <td>@item.Building</td>
+                <td>@item.City</td>
+                <td>@item.Email</td>
+                <td>@item.FirstName</td>
+                <td>@item.LastName</td>
+                <td>@item.LeaseEndDate</td>
+                <td>@item.LeaseStartDate</td>
+                <td>@item.MoveInDate</td>
+                <td>@item.PersonID</td>
+                <td>@item.PropertyID</td>
+                <td>@item.Status</td>
+                <td>@item.State</td>
+                <td>@item.StreetAddress</td>
+                <td>@item.Unit</td>
+            </tr>
+        }
+    </table>
+</div>

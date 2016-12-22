@@ -1,0 +1,321 @@
+﻿@model AGM.Payments.Model.PaymentViewModel
+
+@{
+    Layout = "~/Views/Shared/_Common.cshtml";
+    ViewBag.Title = "Payment";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/Forword.js"></script>
+    <style>
+        .personal {
+            color: cornflowerblue;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        @using (Html.BeginForm())
+        {
+            <div class="container-fluid">
+                <ul class="nav nav-tabs">
+                    <li><a data-toggle="tab" href="#dPersoanl">Personal Information</a></li>
+                    <li id="bill"><a data-toggle="tab" href="#dBilling">Billing Address</a></li>
+                    <li id="credit" class="active"><a data-toggle="tab" href="#Payment">Credit Card Information</a></li>
+                </ul>
+
+                <div class="tab-content">
+
+                    <div id="dPersoanl" class="tab-pane fade">
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-4 form-group">
+                                    <label>First Name :</label>
+                                    @Html.DisplayFor(m => m.FirstName)
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label>Middle&nbsp;Name :</label>
+                                    @Html.DisplayFor(m => m.MiddleName)
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label>Last&nbsp;Name :</label>
+                                    @Html.DisplayFor(m => m.LastName)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-4 form-group">
+                                    <label>Email :</label>
+                                    @Html.DisplayFor(m => m.Email)
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label>Mobile&nbsp;Phone :</label>
+                                    @Html.DisplayFor(m => m.MobilePhone)
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label>Home&nbsp;Phone :</label>
+                                    @Html.DisplayFor(m => m.HomePhone)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-4 form-group">
+                                    <label>Account&nbsp;Type :</label>
+                                    @Html.DisplayFor(m => m.AccountType)
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label>Move&nbsp;In&nbsp;Date :</label>
+                                    @Html.DisplayFor(m => m.MoveInDate)
+                                </div>
+                                <div class="col-md-4 form-group">
+                                    <label>Lease&nbsp;Start&nbsp;Date :</label>
+                                    @Html.DisplayFor(m => m.LeaseStartDate)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-4 form-group">
+                                    <label>Lease&nbsp;End&nbsp;Date :</label>
+                                    @Html.DisplayFor(m => m.LeaseEndDate)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="dBilling" class="tab-pane fade">
+                        <br />
+                        <div class="col-md-4">
+                            <div class="row">
+                                <label>Permanent Address:-</label>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <label>Unit</label>
+                                    @Html.DisplayFor(m => m.Unit)
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <label>Building</label>
+                                    @Html.DisplayFor(m => m.Building)
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <label>Street&nbsp;Address</label>
+                                    @Html.DisplayFor(m => m.StreetAddress)
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <label>City</label>
+                                    @Html.DisplayFor(m => m.City)
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <label>Sate</label>
+                                    @Html.DisplayFor(m => m.State)
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <label>Zip</label>
+                                    @Html.DisplayFor(m => m.Zip)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <label>Do you want to change Billing Address?</label>
+                                        <div class="row">
+                                            <label><input type="radio" id="rdbYes" name="address" value="Y" />Use Permanent Address</label>
+                                        </div>
+                                        <div class="row">
+                                            <label><input type="radio" id="rdbNo" name="address" value="N" />Use New Address</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div id="divNewAddress">
+                                            <div class="form-horizontal">
+                                                <div class="form-group">
+                                                    <label class="col-md-3">Unit</label>
+                                                    @Html.TextBoxFor(m => m.Unit,new { @class="col-md-9, form-control"})
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-3">Building</label>
+                                                    @Html.TextBoxFor(m => m.Building, new { @class = "col-md-9, form-control" })
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-3">Street&nbsp;Address</label>
+                                                    @Html.TextBoxFor(m => m.StreetAddress, new { @class = "col-md-9, form-control" })
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-3">City</label>
+                                                    @Html.TextBoxFor(m => m.City, new { @class = "col-md-9, form-control" })
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-3">Sate</label>
+                                                    @Html.TextBoxFor(m => m.State, new { @class = "col-md-9, form-control" })
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-md-3">Zip</label>
+                                                    @Html.TextBoxFor(m => m.Zip, new { @class = "col-md-9, form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="Payment" class="tab-pane fade in active">
+                        <br />
+                        <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-10">
+                                <img src="~/Images/visa.png" height="53" width="53" />
+                                <img src="~/Images/masterCard.png" />
+                                <img src="~/Images/AmericanExpress.png" />
+                                <img src="~/Images/Discover.png" />
+                            </div>
+                        </div><br />
+                        <div class="form-horizontal">
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Card&nbsp;Number</label>
+                                <div class="col-md-10">
+                                    @Html.TextBoxFor(model => model.CardNumber, new { placeholder = "Enter Card Number", name = "cardNumber", @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.CardNumber, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Expiry&nbsp;Month</label>
+                                <div class="col-md-10">
+                                    @Html.DropDownListFor(model => model.ExpiryMonth, new SelectList(Model.Months, "Value", "Name"), "Select Month", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.ExpiryMonth, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Expiry Year</label>
+                                <div class="col-md-10">
+                                    @Html.DropDownListFor(model => model.ExpiryYear, new SelectList(Model.Years), "Select Year", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.ExpiryYear, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Card Code</label>
+                                <div class="col-md-10">
+                                    @Html.PasswordFor(x => x.CardVerificationValue, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.CardVerificationValue, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2">Amount</label>
+                                <div class="col-md-10">
+                                    @Html.TextBoxFor(x => x.Amount, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-4 text-danger" id="lblMessage"></label>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2"></label>
+                                <div class="col-md-10">
+                                    <button type="submit" id="btnSubmit" class="btn btn-default" onclick="return Validate();">Make Payment</button>
+                                    <button type="reset" class="btn btn-default">Clear</button>
+                                    <button type="button" class="btn btn-default" id="Cancel">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <br />
+    <script>
+        var isChanged = false;
+        $(document).ready(function () {
+            $("#divNewAddress").hide();
+            $("#rdbYes").attr("checked", "true");
+            $("#rdbYes").click(function () {               
+                var rdb = $("#rdbYes").val();
+                if (rdb == "Y") {
+                    $("#divNewAddress").hide();
+                }
+            });
+            $("#rdbNo").click(function () {
+                var rdb = $("#rdbNo").val();
+                isChanged = true;
+                if (rdb == "N") {
+                    $("#divNewAddress").show();
+                }
+            });
+        });
+       
+        function Validate() {
+            debugger;
+            var error = 0;
+            var expiryMonth = $("#ExpiryMonth").val();
+            var expiryYear = $("#ExpiryYear").val();
+            var today = new Date();
+            var selDate = new Date();
+            if (today.getTime() > selDate.setFullYear(expiryYear, expiryMonth)) {
+                $("#lblMessage").text("Card is expired");
+                error++;
+                return false;
+            }
+
+            if (error == 0) {
+                if (!isChanged) {
+                    if (confirm("Do you want to change billing address?")) {
+                        $("#Payment").removeClass("in active");
+                        $("#dBilling").addClass("in active");
+                        $("#bill").addClass("active");
+                        $("#credit").removeClass("active");
+
+                        return false;
+                    }
+                    else {
+                        $("#Payment").addClass("in active");
+                        $("#dBilling").removeClass("in active");
+                        $("#bill").removeClass("active");
+                        $("#credit").addClass("active");
+                    }
+                }
+                
+            }
+        }
+
+        $('#Cancel').click(function () {
+            if (confirm("Are you sure you want to navigate away from this page?")) {
+                window.location.href = "@Request.UrlReferrer.AbsoluteUri";
+            }
+            return false;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "PaymentFail";
+}
+@using AGM.Payments.Model
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/Forword.js"></script>
+</head>
+<body>
+    <div class="container">
+        <hr />
+        <div class="row">
+            @{
+                string message = TempData["Message"] as string;
+            }
+            <div>
+                @if (!string.IsNullOrEmpty(message))
+                {
+                    <label>@message</label>
+                }
+            </div>
+           
+        </div>
+        <div class="row">
+            @{ 
+                Account account = TempData["Account"] as Account;
+            }
+            @Html.ActionLink("Try again??", "Index", "Payment", account,new { })
+        </div>
+    </div>
+</body>
+</html>

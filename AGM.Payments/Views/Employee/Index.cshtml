@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = "Resident List";
+    Layout = "~/Views/Shared/Employee.cshtml";
+}
+@model AGM.Payments.Model.EmployeeProperties
+<div class="container">
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-md-2">Properties :</label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(x => x.Properties, new SelectList(Model.Properties, "Value", "DisplayText"), "Select Property", new { @class = "form-control", id = "ddlProprty" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="" id="content">
+                <div class="table-responsive">
+                    <table id="dtResident" class="table table-condensed table-striped table-hover table-bordered" data-page-length='10'>
+                        <thead>
+                            <tr>
+                                <th>Unit</th>
+                                <th>FirstName</th>
+                                <th>LastName</th>
+                                <th>Email</th>
+                                <th>AccountType</th>
+                                <th>Status</th>
+                                <th>Balance</th>
+                                <th>Pay</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<link href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+<script>
+    RefreshTable("#dtResident", "");
+    $('#ddlProprty').change(function () {
+        var property = $('#ddlProprty').val();
+        if (property.trim().length > 0) {
+
+            RefreshTable("#dtResident", property);
+        }
+        else {
+            RefreshTable("#dtResident", "");
+        }
+    });
+
+    function RefreshTable(tableID, propertyID) {
+        var table = $(tableID).DataTable({
+            "destroy": true,
+            "searching": true,
+            "length": 10,
+            "ordering": true,
+            "pagingType": "full_numbers",
+            "ajax": "@Url.Action("List","Employee")" + "?propertyID=" + propertyID,
+            "columns": [
+                { "data": "Unit" },
+                { "data": "FirstName" },
+                { "data": "LastName" },
+                { "data": "Email" },
+                { "data": "AccountType" },
+                { "data": "Status" },
+                { "data": "Balance" },
+                {
+                    "data": "BillingAccountID", "render": function (data, type, full, meta) {
+                        debugger;
+                        return "<a href='@Url.Action("Index","Payment")?BillingAccountID=" + data + "&PropertyID=" + full.PropertyID + "'>Payment</a>";
+                    }
+                }
+            ]
+        });
+    }
+</script>
+<style>
+    tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+    }
+</style>

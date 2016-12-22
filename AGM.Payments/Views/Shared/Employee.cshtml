@@ -1,0 +1,61 @@
+﻿@using AGM.Payments.Utility
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title - My Resman Payments</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/Forword.js"></script>
+
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="~/Images/Live-Active.png" alt="Live Active" title="Live Active">
+            </div>
+        </div>
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    @Html.ActionLink("Resman Payments", "Index", "Employee", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="@Url.Action("Index", "Employee")">Payment</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @{
+                        string userName = Session["UserName"] as string;
+                        string profileID = (Session["Resman"] as AGM.Payments.Model.ResmanSession).EmployeeUser.EmployeeID.ToString();
+                    }
+
+                    <li>
+                        <a href="#"  class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user control-label"> @userName</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("Index","Profile",new { profileID= profileID, profileType= "Employee"})">Profile</a></li>
+                            <li><a href="#">Change Password</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="@Url.Action("SignOut","Home")"><span class="glyphicon glyphicon-log-out"></span> SignOut</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="container body-content">
+        <br />
+        @RenderBody()
+
+    </div>
+    <br />
+    <div>
+        <p class="panel-footer navbar-fixed-bottom text-center">&copy; @DateTime.Now.Year - My Resman Payments</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title - My Resman Payments</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/Forword.js"></script>
+
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="~/Images/Live-Active.png" alt="Live Active" title="Live Active">
+            </div>
+        </div>
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Resman Payments", "Index", "Resman", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li><a href="@Url.Action("Index", "Resman")">Home</a></li>
+                        <li><a href="@Url.Action("List", "AuthorizeConfiguration")">Authorize.Net</a></li>
+                        <li><a href="@Url.Action("PropertyToPayment", "Resman")">Property Payment Map</a></li>
+                        <li><a href="@Url.Action("EmployeeConfiguration", "Resman")">Employee Configuration</a></li>
+                        <li><a href="@Url.Action("Index", "Transactions")">Transactions</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        @{
+                            string userName = Session["UserName"] as string;
+                        }
+                        <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> @userName</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("Profile", "Resman")">Profile</a></li>
+                                <li><a href="#">Change Password</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="@Url.Action("SignOut", "Home")"><span class="glyphicon glyphicon-log-out"></span> Sign Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="container body-content">
+        <br />
+        @RenderBody()
+        <br />
+    </div>
+    <div>
+        <p class="panel-footer navbar-fixed-bottom text-center">&copy; @DateTime.Now.Year - My Resman Payments</p>
+    </div>
+    <script>
+
+    </script>
+</body>
+</html>

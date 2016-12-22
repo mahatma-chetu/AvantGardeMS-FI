@@ -1,0 +1,104 @@
+﻿
+@using AGM.Payments.Model
+@model Employee
+@using (Html.BeginForm("SaveEmployee", "Resman", FormMethod.Post, new { id = "frmEmployee" }))
+{
+    <div class="form-horizontal">
+        <div class="row">
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                @Html.HiddenFor(x => x.EmployeeID)
+                <label class="control-label col-md-4">Properties</label>
+                <div class="col-md-8">
+                    @for (int i = 0; i < Model.Properties.Count; i++)
+                    {
+                        <div class="row col-md-8">
+                            @Html.CheckBoxFor(x => x.Properties[i].Checked, new { @class = "chkProperty" })
+                            @Html.HiddenFor(m => m.Properties[i].Value)
+                            @Html.HiddenFor(m => m.Properties[i].DisplayText)
+                            @Html.DisplayFor(m => m.Properties[i].DisplayText, new { @class = "control-label" })
+                        </div>
+                    }
+                    <span id="lblProperty" class="field-validation-valid text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Name</label>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Email</label>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", type = "email" })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Password</label>
+                <div class="col-md-8">
+                    @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Phone</label>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.Phone, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Address</label>
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.Address, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4"></label>
+                <div class="col-md-8">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                    <input type="reset" value="Cancel" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    var count = 0;
+    function CountProperty() {
+        $(".chkProperty").each(function () {
+            if (this.checked) {
+                count++;
+            }
+        });
+    }
+    $(document).ready(function () {
+        CountProperty();
+        $(".chkProperty").change(function () {
+            if (this.checked) {
+                count++;
+                $("#lblProperty").text("");
+            }
+            else {
+                count--;
+            }
+        });
+        $("#frmEmployee").submit(function (e) {
+            debugger;
+            CountProperty();
+            if (count <= 0) {
+                $("#lblProperty").text("Property is required");
+                e.preventDefault();
+                count = 0;
+            }
+        });
+    });
+
+</script>

@@ -1,0 +1,296 @@
+﻿
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+.navbar {
+    border-radius: 0px;
+}
+ .dNone {
+            display: none;
+        }
+.choose-login {
+}
+.choose-login label{ font-weight:500; margin-right:10px;}
+.res-login { max-width:490px; margin:0 auto;}
+
+@media (max-width: 1024px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+        margin: 7.5px -15px;
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .navbar-text {
+        float: none;
+        margin: 15px 0;
+    }
+    .navbar-collapse.collapse.in { 
+        display: block!important;
+    }
+    .collapsing {
+        overflow: hidden!important;
+    }
+}
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Roboto');
+
+
+body{
+	background:#edeae3;
+	font-family: 'Open Sans', sans-serif;	
+}
+
+/*header style*/
+.logo{ 
+	float:left; 
+	margin:16px 0;
+}
+.logo img{width: 21%;}
+/*top menu style*/
+.navbar-inverse {
+    background-color: #572671;
+    border-color: #572671;
+}
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover {
+    color: #fff;
+    background-color: #852bb5;
+}
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover {
+    color: #fff;
+    background-color: #852bb5;
+}
+.navbar-inverse .navbar-nav>li>a {
+    color: #FFF;
+}
+.navbar-inverse .navbar-toggle:focus, .navbar-inverse .navbar-toggle:hover {
+    background-color: #852bb5;
+}
+.navbar-inverse .navbar-toggle {
+    border-color: #852bb5;
+}
+
+/* Remove the navbar's default rounded borders and increase the bottom margin */ 
+.navbar {
+  margin-bottom: 0px;
+  border-radius: 0;
+}
+
+/* Remove the jumbotron's default bottom margin */ 
+ .jumbotron {
+  margin-bottom: 0;
+}
+
+
+/*slect payment portal*/
+.slect-payment-portal{ max-width:600px; margin:30px auto;border: 1px solid #dbdbdb;   border-top: 0px;}
+.spp-head{ background:#fcb426; padding:15px 20px;  text-align:center; color:#FFF; }
+.spp-head h2{font-size:24px;font-weight:800;    margin: 0;}
+.spp-body{ background:#FFF; padding:20px;}
+.spp-body .nav-tabs>li.active a{ text-align:left;}
+.spp-body .nav-tabs>li>a { font-size:18px; color:#000001; padding:16px 20px;border-radius: 0px;}
+.spp-body .nav-tabs>li:hover a {color:#572671;}
+.slect-payment-portal .spp-body .nav-tabs>li>a span#icon{ background-image:url("../images/payment-tab.png");  padding: 6px 20px;border-radius: 0px;}
+
+.spp-body .nav-tabs>li>a span.resident{ background-position:-29px -19px;}
+.spp-body .nav-tabs>li:hover a span.resident{ background-position:-29px -84px;}
+.spp-body .nav-tabs>li.active>a span.resident{ background-position:-29px -84px;}
+
+.spp-body .nav-tabs>li>a span.employees{ background-position:-228px -19px;}
+.spp-body .nav-tabs>li:hover a span.employees{ background-position:-228px -84px;}
+.spp-body .nav-tabs>li.active>a span.employees{ background-position:-228px -84px;}
+
+.spp-body .nav-tabs>li>a span.admin{ background-position:-441px -19px;}
+.spp-body .nav-tabs>li:hover a span.admin{ background-position:-441px -84px;}
+.spp-body .nav-tabs>li.active>a span.admin{ background-position:-441px -84px;}
+
+.spp-body #myTab{ margin-bottom:0px;}
+.spp-body .nav-tabs {    border-bottom: 1px solid #f8f8f8;}
+.spp-body .nav-tabs>li.active>a, .spp-body .nav-tabs>li.active>a:focus, .spp-body .nav-tabs>li.active>a:hover {
+    color: #572671;
+    cursor: default;
+    background-color: #f8f8f8;
+    border: 1px solid #f8f8f8;
+    border-bottom-color: transparent;
+}
+
+.slect-box{ background:#f8f8f8; padding:20px;}
+.slect-box select,.form-control{ border-color:#572671; color:#120606; font-size:18px;     padding: 6px 16px; height: auto;border-radius: 0px;}
+.form-control{border-radius: 0px; color:#5e5656;   background-color: #f8f8f8;}
+label{ font-size:14px;font-family: 'Open Sans', sans-serif; color: #000;}
+.slect-payment-portal .tab-cont{ padding:20px 20px 10px;}
+.spp-body .button{ margin-top:10px;}
+.button{background:#572671; font-size:14px; border:0px; color:#FFF; padding:10px 45px;}
+	.button:hover{ background:#852bb5;}
+.nav-tabs>li>a:hover {    border-color: #eee #eee #f8f8f8;}
+
+/*information*/
+.information {  max-width:800px; margin:30px auto;border: 1px none #dbdbdb;   border-top: 0px;}
+.information .spp-body{ padding:0px 0px 15px;background-color: #f8f8f8;}
+.information #myTab{ background:#edeae3;}
+.card{ margin:0 0 15px 0}
+.information .tab-cont{ padding:20px 20px 10px;}
+.information .spp-body .nav-tabs>li.active>a, .information .spp-body .nav-tabs>li.active>a:focus, .information .spp-body .nav-tabs>li.active>a:hover{color: #572671;
+    cursor: default;
+    background-color: #f8f8f8;
+    border: 1px solid #f8f8f8;
+    border-bottom-color: transparent;}
+.information .spp-body .nav-tabs>li>a span#icon{ background-image:url("../images/payment-tab.png");  padding: 6px 20px;border-radius: 0px;}
+.information .tab-cont{max-width:515px; margin:0 auto;} 
+.spp-body .nav-tabs>li>a span.personal{ background-position:-32px -161px;}
+.spp-body .nav-tabs>li:hover a span.personal{ background-position:-32px -263px;}
+.spp-body .nav-tabs>li.active>a span.personal{ background-position:-32px -263px;}
+
+.spp-body .nav-tabs>li>a span.billing{ background-position:-329px -161px;}
+.spp-body .nav-tabs>li:hover a span.billing{ background-position:-329px -263px;}
+.spp-body .nav-tabs>li.active>a span.billing{ background-position:-329px -263px;}
+
+.spp-body .nav-tabs>li>a span.card{ background-position:-581px -264px;}
+.spp-body .nav-tabs>li:hover a span.card{ background-position:-581px -264px;}
+.spp-body .nav-tabs>li.active>a span.card{ background-position:-581px -264px;}
+.information .form-control{border-radius: 0px; color:#5e5656;   background-color: transparent;}
+
+
+
+@media screen and (max-width: 768px) {
+	.logo img { width: 64%; }
+	.spp-body .nav-tabs>li>a span#icon { margin-left: -12px; }
+}
+
+/**
+ * Responsive Bootstrap Tabs by @hayatbiralem
+ * 15 May 2015
+ */
+@media screen and (max-width: 767px) {
+
+  .nav-tabs-responsive > li {
+    display: none;
+    width: 23%;
+  }
+  .nav-tabs-responsive > li > a {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-wrap: normal;
+    width: 100%;
+    width: 100%;
+    text-align: center;
+    vertical-align: top;
+  }
+  .nav-tabs-responsive > li.active {
+    width: 54%;
+  }
+  .nav-tabs-responsive > li.active:first-child {
+    margin-left: 23%;
+  }
+  .nav-tabs-responsive > li.active, .nav-tabs-responsive > li.prev, .nav-tabs-responsive > li.next {
+    display: block;
+  }
+  .nav-tabs-responsive > li.prev, .nav-tabs-responsive > li.next {
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+  }
+  .nav-tabs-responsive > li.next > a, .nav-tabs-responsive > li.prev > a {
+    -webkit-transition: none;
+    transition: none;
+  }
+  .nav-tabs-responsive > li.next > a .text, .nav-tabs-responsive > li.prev > a .text {
+    display: none;
+  }
+  .nav-tabs-responsive > li.next > a:after, .nav-tabs-responsive > li.next > a:after, .nav-tabs-responsive > li.prev > a:after, .nav-tabs-responsive > li.prev > a:after {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .nav-tabs-responsive > li.prev > a:after {
+    content: "\e079";
+  }
+  .nav-tabs-responsive > li.next > a:after {
+    content: "\e080";
+  }
+  .nav-tabs-responsive > li.dropdown > a > .caret {
+    display: none;
+  }
+  .nav-tabs-responsive > li.dropdown > a:after {
+    content: "\e114";
+  }
+  .nav-tabs-responsive > li.dropdown.active > a:after {
+    display: none;
+  }
+  .nav-tabs-responsive > li.dropdown.active > a > .caret {
+    display: inline-block;
+  }
+  .nav-tabs-responsive > li.dropdown .dropdown-menu.pull-xs-left {
+    left: 0;
+    right: auto;
+  }
+  .nav-tabs-responsive > li.dropdown .dropdown-menu.pull-xs-center {
+    right: auto;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+  .nav-tabs-responsive > li.dropdown .dropdown-menu.pull-xs-right {
+    left: auto;
+    right: 0;
+  }
+}
+/**
+ * Demo Styles
+ */
+.wrapper {
+  padding: 15px 0;
+}
+
+.bs-example-tabs .nav-tabs {
+  margin-bottom: 15px;
+}
+
+@media (max-width: 479px) {
+  #narrow-browser-alert {
+    display: none;
+  }
+  
+}
+
+
+
+
+
+
+
+
+/* Add a gray background color and some padding to the footer */
+footer {
+  background-color: #f2f2f2;
+  padding: 25px;
+}

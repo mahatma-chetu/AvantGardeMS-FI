@@ -1,0 +1,46 @@
+﻿@model AGM.Payments.Model.AuthAccount
+
+@using (Html.BeginForm())
+{
+    Html.AntiForgeryToken();
+    <div class="row">
+        <strong>Configure Authorize.net Account.</strong>
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+            </div>
+            <div class="form-group">
+                @Html.HiddenFor(x => x.AuthAccountID)
+                <label class="control-label col-md-4">Auth AccountName</label>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.AuthAccountName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AuthAccountName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Auth ApiID</label>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.ApiID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ApiID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-4">Auth ApiKey</label>
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.ApiKey, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ApiKey, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4"></label>
+                <div class="col-md-8">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                    <input type="reset" value="Cancel" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

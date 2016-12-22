@@ -1,0 +1,235 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Common.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Authorize</title>
+    <meta charset="utf-8" />
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+</head>
+<body>
+    @model AGM.Payments.Model.LoginViewModel
+    @{
+        ViewBag.Title = "Index";
+    }
+
+    <div class="container res-login">
+        <br />
+        @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @id = "frmLogin" }))
+        {
+            Html.AntiForgeryToken();
+            <div class="form-horizontal">
+                <div class="row">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-10">
+                            <div class="choose-login">
+                                <label>@Html.RadioButtonFor(m => m.UserType, "Resident", new { @checked = true, @id = "rdResident" }) Resident</label>
+                                <label>@Html.RadioButtonFor(m => m.UserType, "Employees", new { @id = "rdEmployees" }) Employee</label>
+                                <label>@Html.RadioButtonFor(m => m.UserType, "Admin", new { @id = "rdAdmin" }) Admin</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            string message = TempData["Message"] as string;
+
+            if (!string.IsNullOrEmpty(message))
+            {
+                <div class="form-group" id="message">
+                    <label class="control-label col-md-2"></label>
+                    <span class="control-label text-danger col-md-10">
+                        @message
+                    </span>
+                </div>
+            }
+            <div id="dvResident" class="row border-style">
+
+                <div class="form-horizontal">
+                    <div class="form-group" id="property">
+                        <label class="control-label col-md-2">Property</label>
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(model => model.PropertyID, new SelectList(Model.Properties, "PropertyID", "Name"), "Select Property..", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.PropertyID, "", new { id = "lblProperty", @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Building</label>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.BuildingNo, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.BuildingNo, "", new { id = "lblBuildingNo", @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Unit</label>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Unit, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Unit, "", new { id = "lblUnit", @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Email</label>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.ResidentEmail, new { @class = "form-control", type = "Email" })
+                            @Html.ValidationMessageFor(model => model.ResidentEmail, "", new { @class = "text-danger", id = "lblEmail" })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div id="dEmployee" class="form-horizontal row border-style dNone">
+                <div class="form-group">
+                    <label class="control-label col-md-2">Email</label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.EmployeeEmail, new { @class = "form-control", type = "Email" })
+                        @Html.ValidationMessageFor(model => model.EmployeeEmail, "", new { id = "lblEmpEmail", @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Password</label>
+                    <div class="col-md-10">
+                        @Html.PasswordFor(model => model.EmployeePassword, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.EmployeePassword, "", new { id = "lblEmployeePassword", @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div id="dAdmin" class="form-horizontal row border-style dNone">
+                <div class="form-group">
+                    <label class="control-label col-md-2">Username</label>
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { id = "lblUserName", @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2">Password</label>
+                    <div class="col-md-10">
+                        @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { id = "lblPassword", @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-horizontal row border-style">
+                <div class="form-group">
+                    <label class="control-label col-md-2"></label>
+                    <div class="col-md-10">
+                        <input type="submit" value="Continue" class="btn btn-default" />
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <script>
+
+        var counter = 0;
+        $(document).ready(function () {
+            $("#message").delay(4000).fadeOut("slow");
+            $("#rdResident").attr('checked', true);
+
+            $("#rdResident").click(function () {
+                $("#dEmployee").hide();
+                $("#dAdmin").hide();
+                $("#dvResident").show();
+                ClearError();
+            });
+
+            $("#rdEmployees").click(function () {
+                $("#dvResident").hide();
+                $("#dEmployee").show();
+                $("#dAdmin").hide();
+                ClearError();
+            });
+            $("#rdAdmin").click(function () {
+                $("#dvResident").hide();
+                $("#dEmployee").hide();
+                $("#dAdmin").show();
+                ClearError();
+            });
+            $("#frmLogin").submit(function (e) {
+                ClearError();
+                if ($("#rdResident").is(':checked')) {
+                    ValidationProperty();
+                    ValidateResident();
+                }
+                else if ($("#rdEmployees").is(':checked')) {
+                    ValidateEmployee();
+                }
+                else {
+                    ValidateAdmin();
+                }
+
+                if (counter > 0) {
+                    e.preventDefault();
+                }
+            });
+        });
+
+        function ValidationProperty() {
+            /// <signature>
+            /// <summary>Validate the property</summary>
+            /// </signature>
+            var property = $('#PropertyID').val();
+            if (property.trim().length == 0) {
+                $("#lblProperty").text("Property field is required.")
+                counter++;
+            }
+        }
+        function ValidateResident() {
+            var buliding = $("#BuildingNo").val();
+            var unit = $("#Unit").val();
+            var email = $("#ResidentEmail").val();
+            debugger;
+            if (buliding.trim().length == 0) {
+                counter++;
+                $("#lblBuildingNo").text("Buliding is required.")
+            }
+            if (unit.trim().length == 0) {
+                counter++;
+                $("#lblUnit").text("Unit is required.")
+            }
+            if (email.trim().length == 0) {
+                counter++;
+                $("#lblEmail").text("Email is required.")
+            }
+        }
+        function ValidateEmployee() {
+            var email = $("#EmployeeEmail").val();
+            var empPasscode = $("#EmployeePassword").val();
+
+            if (email.trim().length == 0) {
+                counter++;
+                $("#lblEmpEmail").text("Email is required.")
+            }
+            if (empPasscode.trim().length == 0) {
+                counter++;
+                $("#lblEmployeePassword").text("Password is required.")
+            }
+        }
+        function ValidateAdmin() {
+            var userName = $("#UserName").val();
+            var password = $("#Password").val();
+            if (userName.trim().length == 0) {
+                counter++;
+                $("#lblUserName").text("Username is required.")
+            }
+            if (password.trim().length == 0) {
+                counter++;
+                $("#lblPassword").text("Password is required.")
+            }
+        }
+        function ClearError() {
+            counter = 0;
+            $(".container").find("span").text("");
+        }
+
+    </script>
+</body>
+</html>

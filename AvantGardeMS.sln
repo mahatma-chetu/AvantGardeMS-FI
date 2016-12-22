@@ -1,0 +1,85 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGM.PaymentProcessor", "AGM.PaymentProcessor\AGM.PaymentProcessor.csproj", "{F0849332-7147-4017-AB17-3B8B2D30D847}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGM.PaymentProcessor.Test", "AGM.PaymentProcessor.Test\AGM.PaymentProcessor.Test.csproj", "{D0018F50-BD8E-4013-9786-E6A67EEB5F0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGM.Payments", "AGM.Payments\AGM.Payments.csproj", "{AAFDAD13-3C85-488F-BAD0-24135C6AA164}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGM.Payments.Business", "AGM.Payments.Business\AGM.Payments.Business.csproj", "{91B1991B-5216-4AB1-8F18-BF72C69770B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGM.Payments.Model", "AGM.Payments.Model\AGM.Payments.Model.csproj", "{2C44625E-0EC2-4E59-8959-B4B00CDAEA77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGM.Payments.Data", "AGM.Payments.Data\AGM.Payments.Data.csproj", "{092F68A3-2AB8-484D-8AC7-80CD1C7B902B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AGM.Payments.Utility", "AGM.Payments.Utility\AGM.Payments.Utility.csproj", "{47F2CAFB-E108-41E4-876E-D1A4E543FE99}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F0849332-7147-4017-AB17-3B8B2D30D847}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0849332-7147-4017-AB17-3B8B2D30D847}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0849332-7147-4017-AB17-3B8B2D30D847}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0849332-7147-4017-AB17-3B8B2D30D847}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0018F50-BD8E-4013-9786-E6A67EEB5F0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0018F50-BD8E-4013-9786-E6A67EEB5F0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0018F50-BD8E-4013-9786-E6A67EEB5F0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0018F50-BD8E-4013-9786-E6A67EEB5F0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAFDAD13-3C85-488F-BAD0-24135C6AA164}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAFDAD13-3C85-488F-BAD0-24135C6AA164}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAFDAD13-3C85-488F-BAD0-24135C6AA164}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAFDAD13-3C85-488F-BAD0-24135C6AA164}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91B1991B-5216-4AB1-8F18-BF72C69770B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91B1991B-5216-4AB1-8F18-BF72C69770B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91B1991B-5216-4AB1-8F18-BF72C69770B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91B1991B-5216-4AB1-8F18-BF72C69770B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C44625E-0EC2-4E59-8959-B4B00CDAEA77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C44625E-0EC2-4E59-8959-B4B00CDAEA77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C44625E-0EC2-4E59-8959-B4B00CDAEA77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C44625E-0EC2-4E59-8959-B4B00CDAEA77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{092F68A3-2AB8-484D-8AC7-80CD1C7B902B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{092F68A3-2AB8-484D-8AC7-80CD1C7B902B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{092F68A3-2AB8-484D-8AC7-80CD1C7B902B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{092F68A3-2AB8-484D-8AC7-80CD1C7B902B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47F2CAFB-E108-41E4-876E-D1A4E543FE99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47F2CAFB-E108-41E4-876E-D1A4E543FE99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47F2CAFB-E108-41E4-876E-D1A4E543FE99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47F2CAFB-E108-41E4-876E-D1A4E543FE99}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs01:8080/tfs/chetuprojects
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = AGM.PaymentProcessor.Test\\AGM.PaymentProcessor.Test.csproj
+		SccProjectName1 = AGM.PaymentProcessor.Test
+		SccLocalPath1 = AGM.PaymentProcessor.Test
+		SccProjectUniqueName2 = AGM.PaymentProcessor\\AGM.PaymentProcessor.csproj
+		SccProjectName2 = AGM.PaymentProcessor
+		SccLocalPath2 = AGM.PaymentProcessor
+		SccProjectUniqueName3 = AGM.Payments\\AGM.Payments.csproj
+		SccProjectName3 = AGM.Payments
+		SccLocalPath3 = AGM.Payments
+		SccProjectUniqueName4 = AGM.Payments.Business\\AGM.Payments.Business.csproj
+		SccProjectName4 = AGM.Payments.Business
+		SccLocalPath4 = AGM.Payments.Business
+		SccProjectUniqueName5 = AGM.Payments.Model\\AGM.Payments.Model.csproj
+		SccProjectName5 = AGM.Payments.Model
+		SccLocalPath5 = AGM.Payments.Model
+		SccProjectUniqueName6 = AGM.Payments.Data\\AGM.Payments.Data.csproj
+		SccProjectName6 = AGM.Payments.Data
+		SccLocalPath6 = AGM.Payments.Data
+		SccProjectUniqueName7 = AGM.Payments.Utility\\AGM.Payments.Utility.csproj
+		SccProjectName7 = AGM.Payments.Utility
+		SccLocalPath7 = AGM.Payments.Utility
+	EndGlobalSection
+EndGlobal

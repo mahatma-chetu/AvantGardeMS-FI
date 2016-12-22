@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_Common.cshtml";
+}
+<script src="~/Scripts/Forword.js"></script>
+@model HandleErrorInfo
+@{
+    ViewBag.Title = "Error";
+}
+<h3>
+    Sorry, an error occurred while processing your request. 
+</h3>
+<p>
+    @Model.Exception
+</p>

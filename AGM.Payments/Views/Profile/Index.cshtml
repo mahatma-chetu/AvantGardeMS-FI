@@ -1,0 +1,79 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title= "Profile";
+}
+
+<!DOCTYPE html>
+@model AGM.Payments.Model.ProfileViewModel
+<html>
+<head>
+    
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            @using (Html.BeginForm("Index","Profile",FormMethod.Post))
+            {
+                <div class="form-horizontal">
+                    @Html.AntiForgeryToken()
+                    <div class="form-group" id="divMessage">
+                        <label class="control-label col-md-2"></label>
+                        <div class="col-md-10">
+                            @{
+                                string message = TempData["Message"] as string;
+                            }
+                            @if (!string.IsNullOrEmpty(message))
+                            {
+                                <span id="message" class="alert-info">@message</span>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.HiddenFor(model => model.ProfileID)
+                        <label class="control-label col-md-2">Name</label>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Email</label>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>                    
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Phone</label>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Phone, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Address</label>
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Address, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.HiddenFor(model=>model.ProfileType)
+                        <label class="control-label col-md-2"></label>
+                        <div class="col-md-10">
+                            <input type="submit" value="Save Changes" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <script>
+        $("#divMessage").delay(4000).fadeOut("slow");
+    </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "Authorize.Net Accounts";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+<style>
+    .divPop {
+        padding: 0px 15px 0 10px;
+    }
+</style>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+@model List<AGM.Payments.Model.AuthAccount>
+<div class="container">
+    <div class="row">
+        @{
+            string message = TempData["Message"] as string;
+        }
+        <label id="Message" class="alert-info">@message</label>
+    </div>
+    <div class="row">
+
+        <div class="col-md-6" id="Create">
+            
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <strong>All Authorize.Net accounts. <br /><br /></strong>
+            </div>
+            <div class="row">
+                <div class="table-responsive">
+                    @if (Model != null)
+                    {
+                        <table class="table table-condensed table-bordered" id="AuthAccounts">
+                            <thead>
+                                <tr>
+                                    <td>Account Name</td>
+                                    <td>Api Key</td>
+                                    <td>Api ID</td>
+                                    <td>Action</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td>@item.AuthAccountName</td>
+                                <td>@item.ApiKey</td>
+                                <td>@item.ApiID</td>
+                                <td>
+                                    <a href="#" onclick="Edit('@item.AuthAccountID')">Edit</a>
+                                    <a href="#" onclick="Delete('@item.AuthAccountID')">Delete</a>
+                                </td>
+                            </tr>
+                            }
+                            </tbody>
+                        </table>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<link href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+<script>
+    $(document).ready(function () {
+        $("#AuthAccounts").DataTable();
+    });
+    function Edit(editingItemID) {
+        if (confirm("Are you sure you want Edit this record?")) {
+            $.get("@Url.Action("Create", "AuthorizeConfiguration")/?id=" + editingItemID, function (res) {
+                $("#Create").html(res);
+                return false;
+            });
+        }
+    }
+    function Delete(editingItemID) {
+        if (confirm("Are you sure you want Delete this record?")) {
+            $.get("@Url.Action("Delete", "AuthorizeConfiguration")/?authID=" + editingItemID, function (res) {
+                window.location.href = "@Url.Action("List", "AuthorizeConfiguration")";
+            });
+        }
+    }
+    $(document).ready(function () {
+        $("#Message").delay(5000).fadeOut('slow');;
+        $.get("@Url.Action("Create", "AuthorizeConfiguration")" + "?id=0", function (res) {
+            $("#Create").html(res);
+        });
+    });
+</script>
+
